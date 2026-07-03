@@ -87,7 +87,7 @@ export default function PatientCheckin() {
             <option value="">-- Choose a patient --</option>
             {patients.map((p) => (
               <option key={p._id} value={p._id}>
-                {p.fullName} — {p.condition}
+                {p.fullName} — {p.conditions.join(', ')}
               </option>
             ))}
           </select>

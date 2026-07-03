@@ -36,7 +36,7 @@ export default function PatientPassport() {
         <div className="passport-avatar">{patient.fullName.charAt(0)}</div>
         <div>
           <h2>{patient.fullName}</h2>
-          <p>{patient.condition} • Age {patient.age} • {patient.phone}</p>
+          <p>{patient.conditions.join(', ')} • Age {patient.age ?? 'N/A'} • {patient.phone}</p>
           {latest && (
             <span className="badge" style={{ background: tierColor[latest.riskTier], color: '#fff', marginTop: '8px', display: 'inline-block' }}>
               Current Status: {latest.riskTier}
@@ -48,7 +48,7 @@ export default function PatientPassport() {
       <div className="passport-grid">
         <div className="info-block">
           <h4>Medical Information</h4>
-          <p><strong>Condition:</strong> {patient.condition}</p>
+          <p><strong>Condition(s):</strong> {patient.conditions.join(', ')}</p>
           <p><strong>Medications:</strong> {patient.medications || 'Not recorded'}</p>
           <p><strong>Allergies:</strong> {patient.allergies || 'None recorded'}</p>
           <p><strong>Assigned Doctor:</strong> {patient.assignedDoctor || 'Not assigned'}</p>

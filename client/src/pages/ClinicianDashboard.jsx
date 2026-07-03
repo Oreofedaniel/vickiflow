@@ -54,7 +54,7 @@ export default function ClinicianDashboard() {
             <div key={entry._id} className={`queue-card ${entry.riskTier.toLowerCase()}`}>
               <div className="queue-info">
                 <h3>{entry.patientInfo.fullName}</h3>
-                <p>{entry.patientInfo.condition} • Age {entry.patientInfo.age} • {entry.patientInfo.phone}</p>
+                <p>{entry.patientInfo.conditions.join(', ')} • Age {entry.patientInfo.age ?? 'N/A'} • {entry.patientInfo.phone}</p>
                 <p className="risk-reason">{entry.riskReason}</p>
                 <p className="log-time">Last logged: {new Date(entry.createdAt).toLocaleString()}</p>
               </div>

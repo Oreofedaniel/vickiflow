@@ -9,6 +9,7 @@ dns.setServers(['8.8.8.8', '8.8.4.4']);
 
 const patientRoutes = require('./routes/patients');
 const vitalRoutes = require('./routes/vitals');
+const ussdRoutes = require('./routes/ussd');
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use(express.json());
 
 app.use('/api/patients', patientRoutes);
 app.use('/api/vitals', vitalRoutes);
+app.use('/api/ussd', ussdRoutes);
 
 app.get('/', (req, res) => res.json({ message: 'VickiFlow API running' }));
 

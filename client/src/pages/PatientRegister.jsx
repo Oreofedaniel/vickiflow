@@ -3,12 +3,15 @@ import axios from 'axios';
 
 const API = 'http://localhost:5000/api';
 
+const CONDITION_OPTIONS = ['Hypertension', 'Diabetes', 'Asthma', 'Peptic Ulcer'];
+
 export default function PatientRegister() {
   const [form, setForm] = useState({
     fullName: '',
     age: '',
     phone: '',
-    condition: 'Hypertension',
+    conditions: [],
+    lga: '',
     medications: '',
     allergies: '',
     assignedDoctor: '',
@@ -18,14 +21,26 @@ export default function PatientRegister() {
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
+  const toggleCondition = (condition) => {
+    const already = form.conditions.includes(condition);
+    setForm({
+      ...form,
+      conditions: already ? form.conditions.filter((c) => c !== condition) : [...form.conditions, condition],
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (form.conditions.length === 0) {
+      setMessage({ type: 'error', text: 'Select at least one condition' });
+      return;
+    }
     setLoading(true);
     setMessage(null);
     try {
       const res = await axios.post(`${API}/patients/register`, form);
       setMessage({ type: 'success', text: `Patient registered! ID: ${res.data.patient._id}` });
-      setForm({ fullName: '', age: '', phone: '', condition: 'Hypertension', medications: '', allergies: '', assignedDoctor: '' });
+      setForm({ fullName: '', age: '', phone: '', conditions: [], lga: '', medications: '', allergies: '', assignedDoctor: '' });
     } catch (err) {
       setMessage({ type: 'error', text: err.response?.data?.error || 'Registration failed' });
     } finally {
@@ -52,14 +67,20 @@ export default function PatientRegister() {
             <label>Phone Number</label>
             <input name="phone" value={form.phone} onChange={handleChange} required placeholder="e.g. 08012345678" />
           </div>
-          <div className="form-group">
-            <label>Chronic Condition</label>
-            <select name="condition" value={form.condition} onChange={handleChange}>
-              <option>Hypertension</option>
-              <option>Diabetes</option>
-              <option>Asthma</option>
-              <option>Peptic Ulcer</option>
-            </select>
+          <div className="form-group full-width">
+            <label>Chronic Condition(s)</label>
+            <div className="symptom-grid">
+              {CONDITION_OPTIONS.map((c) => (
+                <label key={c} className={`symptom-chip ${form.conditions.includes(c) ? 'selected' : ''}`}>
+                  <input type="checkbox" checked={form.conditions.includes(c)} onChange={() => toggleCondition(c)} />
+                  {c}
+                </label>
+              ))}
+            </div>
+          </div>
+          <div className="form-group full-width">
+            <label>LGA / Area</label>
+            <input name="lga" value={form.lga} onChange={handleChange} placeholder="e.g. Ogbomoso North" />
           </div>
           <div className="form-group full-width">
             <label>Current Medications</label>

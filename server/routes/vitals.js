@@ -17,7 +17,7 @@ router.post('/log', async (req, res) => {
       bloodGlucose,
       symptoms: symptoms || [],
       medicationTaken,
-      condition: patient.condition,
+      conditions: patient.conditions,
     });
 
     const vital = new Vital({

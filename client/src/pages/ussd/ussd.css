@@ -1,0 +1,40 @@
+.ussd-page { display: flex; gap: 32px; align-items: flex-start; flex-wrap: wrap; }
+
+.ussd-phone { width: 320px; background: #1f2937; border-radius: 28px; padding: 18px; box-shadow: 0 8px 24px rgba(0,0,0,0.25); flex-shrink: 0; }
+.ussd-phone-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.ussd-dial { color: #9ca3af; font-family: 'Courier New', monospace; font-size: 0.8rem; }
+.ussd-emergency-btn { background: #ef4444; color: #fff; border: none; border-radius: 14px; padding: 4px 10px; font-size: 0.72rem; cursor: pointer; }
+.ussd-emergency-btn:hover { background: #dc2626; }
+.ussd-phone-screen { background: #c8d6b9; border-radius: 6px; padding: 16px 14px; min-height: 400px; max-height: 520px; overflow-y: auto; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #1a2e1a; }
+.ussd-phone-footer { display: flex; justify-content: center; margin-top: 12px; min-height: 28px; }
+.ussd-back-btn { background: #374151; color: #e5e7eb; border: none; border-radius: 8px; padding: 6px 16px; font-size: 0.8rem; cursor: pointer; }
+.ussd-back-btn:hover { background: #4b5563; }
+
+.ussd-title { font-weight: 700; margin-bottom: 10px; text-decoration: underline; }
+.ussd-lines p { margin-bottom: 6px; line-height: 1.4; }
+.ussd-options { display: flex; flex-direction: column; gap: 6px; margin-top: 12px; }
+.ussd-option-btn { text-align: left; background: transparent; border: 1px solid rgba(26,46,26,0.35); border-radius: 4px; padding: 6px 8px; font-family: inherit; font-size: 0.85rem; color: #1a2e1a; cursor: pointer; }
+.ussd-option-btn:hover { background: #b7c6a6; }
+.ussd-input-row { display: flex; gap: 6px; margin-top: 12px; }
+.ussd-input-row input { flex: 1; padding: 6px 8px; border: 1px solid rgba(26,46,26,0.35); border-radius: 4px; font-family: inherit; font-size: 0.85rem; background: #dbe6cd; color: #1a2e1a; }
+.ussd-input-row button { background: #1e40af; color: #fff; border: none; border-radius: 4px; padding: 6px 14px; font-size: 0.8rem; cursor: pointer; }
+.ussd-input-row button:hover { background: #1d4ed8; }
+.ussd-inline-error { color: #991b1b; font-size: 0.78rem; margin-top: 8px; }
+.ussd-processing-spinner { font-size: 0.8rem; color: #374151; margin-top: 10px; }
+
+.ussd-sms-panel { flex: 1; min-width: 280px; }
+.ussd-sms-panel h3 { margin-bottom: 12px; color: #1e3a8a; }
+.sms-card { border-radius: 10px; padding: 14px 16px; margin-bottom: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+.sms-card-title { font-weight: 700; margin-bottom: 6px; }
+.sms-card-body { font-size: 0.88rem; line-height: 1.5; white-space: pre-wrap; }
+.sms-card-time { font-size: 0.72rem; color: #64748b; margin-top: 8px; }
+.sms-red { background: #fee2e2; color: #991b1b; }
+.sms-yellow { background: #fef3c7; color: #92400e; }
+.sms-green { background: #d1fae5; color: #065f46; }
+.sms-info { background: #e0e7ff; color: #3730a3; }
+.ussd-empty-inbox { color: #64748b; font-style: italic; }
+
+@media (max-width: 720px) {
+  .ussd-page { flex-direction: column; }
+  .ussd-phone { width: 100%; }
+}
