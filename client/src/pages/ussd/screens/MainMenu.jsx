@@ -35,8 +35,8 @@ export default function MainMenu({ stage, session, actions }) {
           <p>Enter the phone number placing this call to simulate dialing in:</p>
         </div>
         <div className="ussd-input-row">
-          <input value={phoneInput} onChange={(e) => setPhoneInput(e.target.value)} placeholder="e.g. 08012345678" />
-          <button onClick={handleDial}>Dial</button>
+          <input autoFocus value={phoneInput} onChange={(e) => setPhoneInput(e.target.value)} placeholder="e.g. 08012345678" />
+          <button data-key="send" onClick={handleDial}>Dial</button>
         </div>
         {localError && <p className="ussd-inline-error">{localError}</p>}
       </div>
@@ -51,9 +51,9 @@ export default function MainMenu({ stage, session, actions }) {
           <p>You are not registered yet.</p>
         </div>
         <div className="ussd-options">
-          <button className="ussd-option-btn" onClick={() => goTo('REG_R1')}>1. Register now</button>
-          <button className="ussd-option-btn" onClick={() => goTo('INFO_VISIT_WEB')}>2. Visit vickiflow.com to register</button>
-          <button className="ussd-option-btn" onClick={startNewSession}>0. Exit</button>
+          <button data-key="1" className="ussd-option-btn" onClick={() => goTo('REG_R1')}>1. Register now</button>
+          <button data-key="2" className="ussd-option-btn" onClick={() => goTo('INFO_VISIT_WEB')}>2. Visit vickiflow.com to register</button>
+          <button data-key="0" className="ussd-option-btn" onClick={startNewSession}>0. Exit</button>
         </div>
       </div>
     );
@@ -67,7 +67,7 @@ export default function MainMenu({ stage, session, actions }) {
           <p>Please visit vickiflow.com on any internet-enabled device to register.</p>
         </div>
         <div className="ussd-options">
-          <button className="ussd-option-btn" onClick={startNewSession}>0. Exit</button>
+          <button data-key="0" className="ussd-option-btn" onClick={startNewSession}>0. Exit</button>
         </div>
       </div>
     );
@@ -82,7 +82,7 @@ export default function MainMenu({ stage, session, actions }) {
           <p>Stay healthy. 💙</p>
         </div>
         <div className="ussd-options">
-          <button className="ussd-option-btn" onClick={startNewSession}>📞 Dial *384*8425# again</button>
+          <button data-key="1" className="ussd-option-btn" onClick={startNewSession}>📞 Dial *384*8425# again</button>
         </div>
       </div>
     );
@@ -96,11 +96,11 @@ export default function MainMenu({ stage, session, actions }) {
         <p>Smart Care. Connected Health.</p>
       </div>
       <div className="ussd-options">
-        <button className="ussd-option-btn" onClick={() => goTo('VITALS_1_1')}>1. Log my vitals</button>
-        <button className="ussd-option-btn" onClick={() => goTo('CHECK_2_1')}>2. Check my last result</button>
-        <button className="ussd-option-btn" onClick={() => goTo('HOSPITAL_3_1')}>3. Find hospital near me</button>
-        <button className="ussd-option-btn" onClick={() => goTo('REMINDER_4_1')}>4. Medication reminder</button>
-        <button className="ussd-option-btn" onClick={() => goTo('EXIT')}>0. Exit</button>
+        <button data-key="1" className="ussd-option-btn" onClick={() => goTo('VITALS_1_1')}>1. Log my vitals</button>
+        <button data-key="2" className="ussd-option-btn" onClick={() => goTo('CHECK_2_1')}>2. Check my last result</button>
+        <button data-key="3" className="ussd-option-btn" onClick={() => goTo('HOSPITAL_3_1')}>3. Find hospital near me</button>
+        <button data-key="4" className="ussd-option-btn" onClick={() => goTo('REMINDER_4_1')}>4. Medication reminder</button>
+        <button data-key="0" className="ussd-option-btn" onClick={() => goTo('EXIT')}>0. Exit</button>
       </div>
     </div>
   );

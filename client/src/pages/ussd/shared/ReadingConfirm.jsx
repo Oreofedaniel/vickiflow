@@ -37,9 +37,9 @@ export default function ReadingConfirm({ session, actions }) {
         ))}
       </div>
       <div className="ussd-options">
-        <button className="ussd-option-btn" onClick={() => goTo('PROCESSING_1_7')}>1. Submit reading</button>
-        <button className="ussd-option-btn" onClick={editAgain}>2. Enter again (correct mistake)</button>
-        <button className="ussd-option-btn" onClick={cancel}>0. Cancel</button>
+        <button data-key="1" className="ussd-option-btn" onClick={() => goTo('PROCESSING_1_7')}>1. Submit reading</button>
+        <button data-key="2" className="ussd-option-btn" onClick={editAgain}>2. Enter again (correct mistake)</button>
+        <button data-key="0" className="ussd-option-btn" onClick={cancel}>0. Cancel</button>
       </div>
     </div>
   );

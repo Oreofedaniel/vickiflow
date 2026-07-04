@@ -60,7 +60,7 @@ export default function UssdSimulator() {
       <h2>VickiFlow USSD Demo</h2>
       <p className="subtitle">Simulates the *384*8425# feature-phone flow — no internet or smartphone needed on the patient's side.</p>
       <div className="ussd-page">
-        <UssdPhoneFrame onEmergency={() => goTo('EMERGENCY')} onBack={goBack} canGoBack={canGoBack}>
+        <UssdPhoneFrame onEmergency={() => goTo('EMERGENCY')} onBack={goBack} canGoBack={canGoBack} onEnd={startNewSession}>
           {renderScreen()}
         </UssdPhoneFrame>
         <div className="ussd-sms-panel">

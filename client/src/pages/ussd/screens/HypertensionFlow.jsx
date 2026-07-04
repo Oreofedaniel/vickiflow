@@ -29,8 +29,8 @@ export default function HypertensionFlow({ stage, session, actions }) {
           <p>Example: if reading is 140/90, enter 140</p>
         </div>
         <div className="ussd-input-row">
-          <input value={textInput} onChange={(e) => setTextInput(e.target.value)} placeholder="e.g. 138" />
-          <button onClick={submit}>Send</button>
+          <input autoFocus value={textInput} onChange={(e) => setTextInput(e.target.value)} placeholder="e.g. 138" />
+          <button data-key="send" onClick={submit}>Send</button>
         </div>
         {localError && <p className="ussd-inline-error">{localError}</p>}
       </div>
@@ -57,8 +57,8 @@ export default function HypertensionFlow({ stage, session, actions }) {
           <p>Example: if reading is 140/90, enter 90</p>
         </div>
         <div className="ussd-input-row">
-          <input value={textInput} onChange={(e) => setTextInput(e.target.value)} placeholder="e.g. 88" />
-          <button onClick={submit}>Send</button>
+          <input autoFocus value={textInput} onChange={(e) => setTextInput(e.target.value)} placeholder="e.g. 88" />
+          <button data-key="send" onClick={submit}>Send</button>
         </div>
         {localError && <p className="ussd-inline-error">{localError}</p>}
       </div>
@@ -103,9 +103,9 @@ export default function HypertensionFlow({ stage, session, actions }) {
       <div className="ussd-lines"><p>Do you have any of these today?</p></div>
       <div className="ussd-options">
         {SYMPTOM_OPTIONS.map((s, i) => (
-          <button key={s} className="ussd-option-btn" onClick={() => chooseSingle(s)}>{i + 1}. {s}</button>
+          <button key={s} data-key={String(i + 1)} className="ussd-option-btn" onClick={() => chooseSingle(s)}>{i + 1}. {s}</button>
         ))}
-        <button className="ussd-option-btn" onClick={() => setMultiSelectMode(true)}>5. More than one of the above</button>
+        <button data-key="5" className="ussd-option-btn" onClick={() => setMultiSelectMode(true)}>5. More than one of the above</button>
       </div>
     </div>
   );

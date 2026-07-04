@@ -1,26 +1,40 @@
 .ussd-page { display: flex; gap: 32px; align-items: flex-start; flex-wrap: wrap; }
 
-.ussd-phone { width: 320px; background: #1f2937; border-radius: 28px; padding: 18px; box-shadow: 0 8px 24px rgba(0,0,0,0.25); flex-shrink: 0; }
+.ussd-phone { width: 320px; background: #0b0f0b; border: 6px solid #1c1c1c; border-radius: 28px; padding: 18px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); flex-shrink: 0; }
 .ussd-phone-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-.ussd-dial { color: #9ca3af; font-family: 'Courier New', monospace; font-size: 0.8rem; }
+.ussd-dial { color: #6b7280; font-family: 'Courier New', monospace; font-size: 0.8rem; }
 .ussd-emergency-btn { background: #ef4444; color: #fff; border: none; border-radius: 14px; padding: 4px 10px; font-size: 0.72rem; cursor: pointer; }
 .ussd-emergency-btn:hover { background: #dc2626; }
-.ussd-phone-screen { background: #c8d6b9; border-radius: 6px; padding: 16px 14px; min-height: 400px; max-height: 520px; overflow-y: auto; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #1a2e1a; }
-.ussd-phone-footer { display: flex; justify-content: center; margin-top: 12px; min-height: 28px; }
-.ussd-back-btn { background: #374151; color: #e5e7eb; border: none; border-radius: 8px; padding: 6px 16px; font-size: 0.8rem; cursor: pointer; }
-.ussd-back-btn:hover { background: #4b5563; }
+.ussd-phone-screen { background: #0d1f0d; border: 2px solid #1a3a1a; border-radius: 4px; padding: 14px 12px; min-height: 340px; max-height: 420px; overflow-y: auto; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #4ade80; text-shadow: 0 0 2px rgba(74,222,128,0.4); }
+.ussd-phone-footer { display: flex; justify-content: center; margin-top: 10px; min-height: 28px; }
+.ussd-back-btn { background: #262626; color: #d1d5db; border: 1px solid #3f3f3f; border-radius: 8px; padding: 6px 16px; font-size: 0.8rem; cursor: pointer; }
+.ussd-back-btn:hover { background: #333; }
 
 .ussd-title { font-weight: 700; margin-bottom: 10px; text-decoration: underline; }
 .ussd-lines p { margin-bottom: 6px; line-height: 1.4; }
-.ussd-options { display: flex; flex-direction: column; gap: 6px; margin-top: 12px; }
-.ussd-option-btn { text-align: left; background: transparent; border: 1px solid rgba(26,46,26,0.35); border-radius: 4px; padding: 6px 8px; font-family: inherit; font-size: 0.85rem; color: #1a2e1a; cursor: pointer; }
-.ussd-option-btn:hover { background: #b7c6a6; }
+.ussd-options { display: flex; flex-direction: column; gap: 2px; margin-top: 12px; }
+.ussd-option-btn { text-align: left; background: transparent; border: none; padding: 2px 0; font-family: inherit; font-size: 0.85rem; color: #4ade80; cursor: pointer; display: block; width: 100%; }
+.ussd-option-btn:hover { color: #86efac; text-shadow: 0 0 4px rgba(134,239,172,0.6); }
 .ussd-input-row { display: flex; gap: 6px; margin-top: 12px; }
-.ussd-input-row input { flex: 1; padding: 6px 8px; border: 1px solid rgba(26,46,26,0.35); border-radius: 4px; font-family: inherit; font-size: 0.85rem; background: #dbe6cd; color: #1a2e1a; }
-.ussd-input-row button { background: #1e40af; color: #fff; border: none; border-radius: 4px; padding: 6px 14px; font-size: 0.8rem; cursor: pointer; }
-.ussd-input-row button:hover { background: #1d4ed8; }
-.ussd-inline-error { color: #991b1b; font-size: 0.78rem; margin-top: 8px; }
-.ussd-processing-spinner { font-size: 0.8rem; color: #374151; margin-top: 10px; }
+.ussd-input-row input { flex: 1; padding: 6px 8px; border: 1px solid #1a3a1a; border-radius: 4px; font-family: inherit; font-size: 0.85rem; background: #08140d; color: #4ade80; }
+.ussd-input-row button { background: #166534; color: #dcfce7; border: none; border-radius: 4px; padding: 6px 14px; font-size: 0.8rem; cursor: pointer; }
+.ussd-input-row button:hover { background: #15803d; }
+.ussd-inline-error { color: #f87171; font-size: 0.78rem; margin-top: 8px; }
+.ussd-processing-spinner { font-size: 0.8rem; color: #86efac; margin-top: 10px; }
+
+.ussd-keypad-buffer { text-align: center; font-family: 'Courier New', monospace; color: #9ca3af; font-size: 0.85rem; min-height: 18px; margin-top: 10px; letter-spacing: 2px; }
+.ussd-keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 6px; }
+.ussd-key { background: #1f2937; color: #e5e7eb; border: 1px solid #374151; border-radius: 10px; padding: 10px 0; font-size: 1rem; font-weight: 600; cursor: pointer; }
+.ussd-key:hover { background: #2a3646; }
+.ussd-key:active { background: #374151; }
+.ussd-keypad-controls { display: grid; grid-template-columns: 1.4fr 0.8fr 0.8fr; gap: 8px; margin-top: 8px; }
+.ussd-key-ok, .ussd-key-back, .ussd-key-end { border: none; border-radius: 10px; padding: 10px 0; font-size: 0.85rem; font-weight: 600; cursor: pointer; }
+.ussd-key-ok { background: #166534; color: #dcfce7; }
+.ussd-key-ok:hover { background: #15803d; }
+.ussd-key-back { background: #374151; color: #e5e7eb; }
+.ussd-key-back:hover { background: #4b5563; }
+.ussd-key-end { background: #b91c1c; color: #fff; }
+.ussd-key-end:hover { background: #991b1b; }
 
 .ussd-sms-panel { flex: 1; min-width: 280px; }
 .ussd-sms-panel h3 { margin-bottom: 12px; color: #1e3a8a; }

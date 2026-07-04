@@ -79,7 +79,7 @@ export default function Processing({ session, actions }) {
       {!result && !errorMsg && <p className="ussd-processing-spinner">⏳ Checking your reading…</p>}
       {result && (
         <div className="ussd-options">
-          <button className="ussd-option-btn" onClick={continueNext}>
+          <button data-key="1" className="ussd-option-btn" onClick={continueNext}>
             {draft.nextFlow ? `1. Continue to ${draft.nextFlow === 'Diabetes' ? 'Blood Sugar' : draft.nextFlow} entry` : '📞 Dial *384*8425# again'}
           </button>
         </div>

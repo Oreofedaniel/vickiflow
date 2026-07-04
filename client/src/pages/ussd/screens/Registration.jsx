@@ -28,8 +28,8 @@ export default function Registration({ stage, session, actions }) {
         <div className="ussd-title">VickiFlow Registration</div>
         <div className="ussd-lines"><p>Enter your first name:</p></div>
         <div className="ussd-input-row">
-          <input value={textInput} onChange={(e) => setTextInput(e.target.value)} placeholder="e.g. Seun" />
-          <button onClick={() => submitText('firstName', 'REG_R2')}>Send</button>
+          <input autoFocus value={textInput} onChange={(e) => setTextInput(e.target.value)} placeholder="e.g. Seun" />
+          <button data-key="send" onClick={() => submitText('firstName', 'REG_R2')}>Send</button>
         </div>
         {localError && <p className="ussd-inline-error">{localError}</p>}
       </div>
@@ -42,8 +42,8 @@ export default function Registration({ stage, session, actions }) {
         <div className="ussd-title">VickiFlow Registration</div>
         <div className="ussd-lines"><p>Enter your last name:</p></div>
         <div className="ussd-input-row">
-          <input value={textInput} onChange={(e) => setTextInput(e.target.value)} placeholder="e.g. Adeleke" />
-          <button onClick={() => submitText('lastName', 'REG_R3')}>Send</button>
+          <input autoFocus value={textInput} onChange={(e) => setTextInput(e.target.value)} placeholder="e.g. Adeleke" />
+          <button data-key="send" onClick={() => submitText('lastName', 'REG_R3')}>Send</button>
         </div>
         {localError && <p className="ussd-inline-error">{localError}</p>}
       </div>
@@ -61,9 +61,9 @@ export default function Registration({ stage, session, actions }) {
         <div className="ussd-lines"><p>Select your condition:</p></div>
         <div className="ussd-options">
           {CONDITIONS.map((c, i) => (
-            <button key={c} className="ussd-option-btn" onClick={() => pickSingle(c)}>{i + 1}. {c}</button>
+            <button key={c} data-key={String(i + 1)} className="ussd-option-btn" onClick={() => pickSingle(c)}>{i + 1}. {c}</button>
           ))}
-          <button className="ussd-option-btn" onClick={() => goTo('REG_R3B')}>5. More than one</button>
+          <button data-key="5" className="ussd-option-btn" onClick={() => goTo('REG_R3B')}>5. More than one</button>
         </div>
       </div>
     );
@@ -81,7 +81,7 @@ export default function Registration({ stage, session, actions }) {
         <div className="ussd-lines"><p>Select your first condition:</p></div>
         <div className="ussd-options">
           {CONDITIONS.map((c, i) => (
-            <button key={c} className="ussd-option-btn" onClick={() => pickFirst(c)}>{i + 1}. {c}</button>
+            <button key={c} data-key={String(i + 1)} className="ussd-option-btn" onClick={() => pickFirst(c)}>{i + 1}. {c}</button>
           ))}
         </div>
       </div>
@@ -100,9 +100,9 @@ export default function Registration({ stage, session, actions }) {
         <div className="ussd-lines"><p>Select your second condition:</p></div>
         <div className="ussd-options">
           {remaining.map((c) => (
-            <button key={c} className="ussd-option-btn" onClick={() => pickSecond(c)}>{CONDITIONS.indexOf(c) + 1}. {c}</button>
+            <button key={c} data-key={String(CONDITIONS.indexOf(c) + 1)} className="ussd-option-btn" onClick={() => pickSecond(c)}>{CONDITIONS.indexOf(c) + 1}. {c}</button>
           ))}
-          <button className="ussd-option-btn" onClick={() => goTo('REG_R5')}>0. None of the above</button>
+          <button data-key="0" className="ussd-option-btn" onClick={() => goTo('REG_R5')}>0. None of the above</button>
         </div>
       </div>
     );
@@ -117,8 +117,8 @@ export default function Registration({ stage, session, actions }) {
           <p>(e.g. Ogbomoso North, Ibadan North, Lagos Island):</p>
         </div>
         <div className="ussd-input-row">
-          <input value={textInput} onChange={(e) => setTextInput(e.target.value)} placeholder="e.g. Ogbomoso North" />
-          <button onClick={() => submitText('lga', 'REG_R6')}>Send</button>
+          <input autoFocus value={textInput} onChange={(e) => setTextInput(e.target.value)} placeholder="e.g. Ogbomoso North" />
+          <button data-key="send" onClick={() => submitText('lga', 'REG_R6')}>Send</button>
         </div>
         {localError && <p className="ussd-inline-error">{localError}</p>}
       </div>
@@ -159,9 +159,9 @@ export default function Registration({ stage, session, actions }) {
           <p>LGA: {reg.lga}</p>
         </div>
         <div className="ussd-options">
-          <button className="ussd-option-btn" onClick={confirm}>1. Confirm &amp; Register</button>
-          <button className="ussd-option-btn" onClick={startOver}>2. Start over</button>
-          <button className="ussd-option-btn" onClick={actions.startNewSession}>0. Exit</button>
+          <button data-key="1" className="ussd-option-btn" onClick={confirm}>1. Confirm &amp; Register</button>
+          <button data-key="2" className="ussd-option-btn" onClick={startOver}>2. Start over</button>
+          <button data-key="0" className="ussd-option-btn" onClick={actions.startNewSession}>0. Exit</button>
         </div>
         {localError && <p className="ussd-inline-error">{localError}</p>}
       </div>
@@ -185,7 +185,7 @@ export default function Registration({ stage, session, actions }) {
         <p>Welcome to VickiFlow, {reg.firstName}.</p>
       </div>
       <div className="ussd-options">
-        <button className="ussd-option-btn" onClick={continueToMenu}>📞 Dial *384*8425# again</button>
+        <button data-key="1" className="ussd-option-btn" onClick={continueToMenu}>📞 Dial *384*8425# again</button>
       </div>
     </div>
   );

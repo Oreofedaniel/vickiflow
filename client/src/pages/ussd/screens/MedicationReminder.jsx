@@ -15,10 +15,10 @@ export default function MedicationReminder({ stage, session, actions }) {
         <div className="ussd-title">VickiFlow - Medication Reminder</div>
         <div className="ussd-lines"><p>What would you like to do?</p></div>
         <div className="ussd-options">
-          <button className="ussd-option-btn" onClick={() => goTo('REMINDER_4_2')}>1. Set daily reminder time</button>
-          <button className="ussd-option-btn" onClick={() => goTo('REMINDER_4_4')}>2. View my medications</button>
-          <button className="ussd-option-btn" onClick={() => goTo('REMINDER_4_5')}>3. Report I ran out of medicine</button>
-          <button className="ussd-option-btn" onClick={() => goTo('MAIN_MENU')}>0. Back</button>
+          <button data-key="1" className="ussd-option-btn" onClick={() => goTo('REMINDER_4_2')}>1. Set daily reminder time</button>
+          <button data-key="2" className="ussd-option-btn" onClick={() => goTo('REMINDER_4_4')}>2. View my medications</button>
+          <button data-key="3" className="ussd-option-btn" onClick={() => goTo('REMINDER_4_5')}>3. Report I ran out of medicine</button>
+          <button data-key="0" className="ussd-option-btn" onClick={() => goTo('MAIN_MENU')}>0. Back</button>
         </div>
       </div>
     );
@@ -36,7 +36,7 @@ export default function MedicationReminder({ stage, session, actions }) {
         <div className="ussd-lines"><p>What time should we remind you to take your medication?</p></div>
         <div className="ussd-options">
           {TIME_OPTIONS.map((t, i) => (
-            <button key={t} className="ussd-option-btn" onClick={() => pick(t)}>{i + 1}. {t}</button>
+            <button key={t} data-key={String(i + 1)} className="ussd-option-btn" onClick={() => pick(t)}>{i + 1}. {t}</button>
           ))}
         </div>
       </div>
@@ -53,7 +53,7 @@ export default function MedicationReminder({ stage, session, actions }) {
           <p>Stay consistent. Stay healthy. 💪</p>
         </div>
         <div className="ussd-options">
-          <button className="ussd-option-btn" onClick={() => goTo('MAIN_MENU')}>📞 Dial *384*8425# again</button>
+          <button data-key="1" className="ussd-option-btn" onClick={() => goTo('MAIN_MENU')}>📞 Dial *384*8425# again</button>
         </div>
       </div>
     );
@@ -74,7 +74,7 @@ export default function MedicationReminder({ stage, session, actions }) {
           <p>{new Date(patient.updatedAt).toLocaleDateString()}</p>
         </div>
         <div className="ussd-options">
-          <button className="ussd-option-btn" onClick={() => goTo('REMINDER_4_1')}>0. Back</button>
+          <button data-key="0" className="ussd-option-btn" onClick={() => goTo('REMINDER_4_1')}>0. Back</button>
         </div>
       </div>
     );
@@ -100,10 +100,10 @@ export default function MedicationReminder({ stage, session, actions }) {
         <div className="ussd-lines"><p>Which medication did you run out of?</p></div>
         <div className="ussd-options">
           {medications.map((m, i) => (
-            <button key={m} className="ussd-option-btn" onClick={() => pick(m)}>{i + 1}. {m}</button>
+            <button key={m} data-key={String(i + 1)} className="ussd-option-btn" onClick={() => pick(m)}>{i + 1}. {m}</button>
           ))}
-          <button className="ussd-option-btn" onClick={() => pick('all my medications')}>{medications.length + 1}. All my medications</button>
-          <button className="ussd-option-btn" onClick={() => goTo('REMINDER_4_1')}>0. Back</button>
+          <button data-key={String(medications.length + 1)} className="ussd-option-btn" onClick={() => pick('all my medications')}>{medications.length + 1}. All my medications</button>
+          <button data-key="0" className="ussd-option-btn" onClick={() => goTo('REMINDER_4_1')}>0. Back</button>
         </div>
       </div>
     );
@@ -119,7 +119,7 @@ export default function MedicationReminder({ stage, session, actions }) {
         <p>Do NOT skip doses. 💊</p>
       </div>
       <div className="ussd-options">
-        <button className="ussd-option-btn" onClick={() => goTo('MAIN_MENU')}>📞 Dial *384*8425# again</button>
+        <button data-key="1" className="ussd-option-btn" onClick={() => goTo('MAIN_MENU')}>📞 Dial *384*8425# again</button>
       </div>
     </div>
   );

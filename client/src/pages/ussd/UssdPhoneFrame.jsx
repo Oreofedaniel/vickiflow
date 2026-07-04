@@ -1,4 +1,63 @@
-export default function UssdPhoneFrame({ onEmergency, onBack, canGoBack, children }) {
+import { useRef, useState } from 'react';
+
+const KEYS = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '*', '0', '#'];
+
+const nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
+
+function setInputValue(input, value) {
+  nativeInputValueSetter.call(input, value);
+  input.dispatchEvent(new Event('input', { bubbles: true }));
+}
+
+function getFocusedInput(container) {
+  const active = document.activeElement;
+  if (active && active.tagName === 'INPUT' && container?.contains(active)) return active;
+  return null;
+}
+
+export default function UssdPhoneFrame({ onEmergency, onBack, canGoBack, onEnd, children }) {
+  const screenRef = useRef(null);
+  const [buffer, setBuffer] = useState('');
+  const [keypadError, setKeypadError] = useState('');
+  const [typingInField, setTypingInField] = useState(false);
+
+  const pressKey = (k) => {
+    setKeypadError('');
+    const input = getFocusedInput(screenRef.current);
+    if (input) {
+      setInputValue(input, input.value + k);
+      return;
+    }
+    setBuffer((b) => b + k);
+  };
+
+  const backspace = () => {
+    setKeypadError('');
+    const input = getFocusedInput(screenRef.current);
+    if (input) {
+      setInputValue(input, input.value.slice(0, -1));
+      return;
+    }
+    setBuffer((b) => b.slice(0, -1));
+  };
+
+  const send = () => {
+    const input = getFocusedInput(screenRef.current);
+    if (input) {
+      screenRef.current.querySelector('[data-key="send"]')?.click();
+      return;
+    }
+    if (!buffer) return;
+    const target = screenRef.current?.querySelector(`[data-key="${buffer}"]`);
+    if (target) {
+      target.click();
+      setBuffer('');
+      setKeypadError('');
+    } else {
+      setKeypadError('Invalid option');
+    }
+  };
+
   return (
     <div className="ussd-phone">
       <div className="ussd-phone-header">
@@ -7,7 +66,28 @@ export default function UssdPhoneFrame({ onEmergency, onBack, canGoBack, childre
           🚨 999
         </button>
       </div>
-      <div className="ussd-phone-screen">{children}</div>
+      <div
+        className="ussd-phone-screen"
+        ref={screenRef}
+        onFocus={() => setTypingInField(!!getFocusedInput(screenRef.current))}
+        onBlur={() => setTypingInField(false)}
+      >
+        {children}
+      </div>
+      <div className="ussd-keypad-buffer">
+        {typingInField ? 'Typing in field above ⌨' : buffer ? `> ${buffer}` : ' '}
+      </div>
+      {keypadError && <div className="ussd-inline-error">{keypadError}</div>}
+      <div className="ussd-keypad">
+        {KEYS.map((k) => (
+          <button key={k} className="ussd-key" onMouseDown={(e) => e.preventDefault()} onClick={() => pressKey(k)}>{k}</button>
+        ))}
+      </div>
+      <div className="ussd-keypad-controls">
+        <button className="ussd-key-ok" onMouseDown={(e) => e.preventDefault()} onClick={send}>OK / Send</button>
+        <button className="ussd-key-back" onMouseDown={(e) => e.preventDefault()} onClick={backspace}>⌫</button>
+        <button className="ussd-key-end" onMouseDown={(e) => e.preventDefault()} onClick={onEnd}>End</button>
+      </div>
       <div className="ussd-phone-footer">
         {canGoBack && (
           <button className="ussd-back-btn" onClick={onBack}>

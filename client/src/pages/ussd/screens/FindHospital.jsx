@@ -21,8 +21,8 @@ export default function FindHospital({ stage, session, actions }) {
           <p>(e.g. Ogbomoso, Ibadan North, Surulere, Kano Municipal)</p>
         </div>
         <div className="ussd-input-row">
-          <input value={textInput} onChange={(e) => setTextInput(e.target.value)} placeholder="e.g. Ogbomoso" />
-          <button onClick={submit}>Send</button>
+          <input autoFocus value={textInput} onChange={(e) => setTextInput(e.target.value)} placeholder="e.g. Ogbomoso" />
+          <button data-key="send" onClick={submit}>Send</button>
         </div>
       </div>
     );
@@ -39,11 +39,11 @@ export default function FindHospital({ stage, session, actions }) {
         <div className="ussd-lines"><p>({session.hospitalSearchArea} area)</p></div>
         <div className="ussd-options">
           {HOSPITALS.map((h, i) => (
-            <button key={h.id} className="ussd-option-btn" onClick={() => pick(h)}>
+            <button key={h.id} data-key={String(i + 1)} className="ussd-option-btn" onClick={() => pick(h)}>
               {i + 1}. {h.name} — {h.distanceKm}km - {h.status}
             </button>
           ))}
-          <button className="ussd-option-btn" onClick={() => goTo('MAIN_MENU')}>0. Back</button>
+          <button data-key="0" className="ussd-option-btn" onClick={() => goTo('MAIN_MENU')}>0. Back</button>
         </div>
       </div>
     );
@@ -67,9 +67,9 @@ export default function FindHospital({ stage, session, actions }) {
           <p>Opening: {hospital.hours}</p>
         </div>
         <div className="ussd-options">
-          <button className="ussd-option-btn" onClick={sendRecord}>1. Send my health record to this hospital</button>
-          <button className="ussd-option-btn" onClick={getDirections}>2. Get directions by SMS</button>
-          <button className="ussd-option-btn" onClick={() => goTo('HOSPITAL_3_2')}>0. Back</button>
+          <button data-key="1" className="ussd-option-btn" onClick={sendRecord}>1. Send my health record to this hospital</button>
+          <button data-key="2" className="ussd-option-btn" onClick={getDirections}>2. Get directions by SMS</button>
+          <button data-key="0" className="ussd-option-btn" onClick={() => goTo('HOSPITAL_3_2')}>0. Back</button>
         </div>
       </div>
     );
@@ -84,7 +84,7 @@ export default function FindHospital({ stage, session, actions }) {
           <p>Stay safe. 🙏</p>
         </div>
         <div className="ussd-options">
-          <button className="ussd-option-btn" onClick={() => goTo('MAIN_MENU')}>📞 Dial *384*8425# again</button>
+          <button data-key="1" className="ussd-option-btn" onClick={() => goTo('MAIN_MENU')}>📞 Dial *384*8425# again</button>
         </div>
       </div>
     );
@@ -98,7 +98,7 @@ export default function FindHospital({ stage, session, actions }) {
         <p>Your health record has been shared with {hospital.name}.</p>
       </div>
       <div className="ussd-options">
-        <button className="ussd-option-btn" onClick={() => goTo('MAIN_MENU')}>📞 Dial *384*8425# again</button>
+        <button data-key="1" className="ussd-option-btn" onClick={() => goTo('MAIN_MENU')}>📞 Dial *384*8425# again</button>
       </div>
     </div>
   );

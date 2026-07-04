@@ -19,7 +19,7 @@ export default function DiabetesFlow({ stage, session, actions }) {
         <div className="ussd-lines"><p>When did you last eat?</p></div>
         <div className="ussd-options">
           {MEAL_OPTIONS.map((m, i) => (
-            <button key={m} className="ussd-option-btn" onClick={() => choose(m)}>{i + 1}. {m}</button>
+            <button key={m} data-key={String(i + 1)} className="ussd-option-btn" onClick={() => choose(m)}>{i + 1}. {m}</button>
           ))}
         </div>
       </div>
@@ -47,8 +47,8 @@ export default function DiabetesFlow({ stage, session, actions }) {
           <p>Example: enter 126 for 126 mg/dL</p>
         </div>
         <div className="ussd-input-row">
-          <input value={textInput} onChange={(e) => setTextInput(e.target.value)} placeholder="e.g. 142" />
-          <button onClick={submit}>Send</button>
+          <input autoFocus value={textInput} onChange={(e) => setTextInput(e.target.value)} placeholder="e.g. 142" />
+          <button data-key="send" onClick={submit}>Send</button>
         </div>
         {localError && <p className="ussd-inline-error">{localError}</p>}
       </div>
@@ -66,7 +66,7 @@ export default function DiabetesFlow({ stage, session, actions }) {
       <div className="ussd-lines"><p>Any of these symptoms today?</p></div>
       <div className="ussd-options">
         {SYMPTOM_OPTIONS.map((s, i) => (
-          <button key={s} className="ussd-option-btn" onClick={() => choose(s)}>{i + 1}. {s}</button>
+          <button key={s} data-key={String(i + 1)} className="ussd-option-btn" onClick={() => choose(s)}>{i + 1}. {s}</button>
         ))}
       </div>
     </div>

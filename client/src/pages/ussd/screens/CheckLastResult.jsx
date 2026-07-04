@@ -43,8 +43,8 @@ export default function CheckLastResult({ session, actions }) {
         <div className="ussd-title">VickiFlow - Your Last Result</div>
         <div className="ussd-lines"><p>You have not logged any readings yet.</p></div>
         <div className="ussd-options">
-          <button className="ussd-option-btn" onClick={() => goTo('VITALS_1_1')}>1. Log new reading now</button>
-          <button className="ussd-option-btn" onClick={() => goTo('MAIN_MENU')}>0. Exit</button>
+          <button data-key="1" className="ussd-option-btn" onClick={() => goTo('VITALS_1_1')}>1. Log new reading now</button>
+          <button data-key="0" className="ussd-option-btn" onClick={() => goTo('MAIN_MENU')}>0. Exit</button>
         </div>
       </div>
     );
@@ -66,10 +66,10 @@ export default function CheckLastResult({ session, actions }) {
         {!checkedInToday && <p>You have NOT checked in today.</p>}
       </div>
       <div className="ussd-options">
-        <button className="ussd-option-btn" onClick={() => goTo('VITALS_1_1')}>
+        <button data-key="1" className="ussd-option-btn" onClick={() => goTo('VITALS_1_1')}>
           1. {checkedInToday ? 'Log new reading now' : "Log today's reading now"}
         </button>
-        <button className="ussd-option-btn" onClick={() => goTo('MAIN_MENU')}>0. Exit</button>
+        <button data-key="0" className="ussd-option-btn" onClick={() => goTo('MAIN_MENU')}>0. Exit</button>
       </div>
     </div>
   );

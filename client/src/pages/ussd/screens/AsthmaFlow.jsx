@@ -16,7 +16,7 @@ export default function AsthmaFlow({ stage, session, actions }) {
         <div className="ussd-lines"><p>How is your breathing today?</p></div>
         <div className="ussd-options">
           {BREATHING_OPTIONS.map((b, i) => (
-            <button key={b} className="ussd-option-btn" onClick={() => choose(b)}>{i + 1}. {b}</button>
+            <button key={b} data-key={String(i + 1)} className="ussd-option-btn" onClick={() => choose(b)}>{i + 1}. {b}</button>
           ))}
         </div>
       </div>
@@ -35,7 +35,7 @@ export default function AsthmaFlow({ stage, session, actions }) {
       <div className="ussd-lines"><p>Did you experience any of these today?</p></div>
       <div className="ussd-options">
         {SYMPTOM_OPTIONS.map((s, i) => (
-          <button key={s} className="ussd-option-btn" onClick={() => choose(s)}>{i + 1}. {s}</button>
+          <button key={s} data-key={String(i + 1)} className="ussd-option-btn" onClick={() => choose(s)}>{i + 1}. {s}</button>
         ))}
       </div>
     </div>

@@ -54,17 +54,17 @@ export default function VitalsRouter({ session, actions }) {
       <div className="ussd-options">
         {isHtnDmOnly ? (
           <>
-            <button className="ussd-option-btn" onClick={() => enterFlow('Hypertension')}>1. Blood Pressure</button>
-            <button className="ussd-option-btn" onClick={() => enterFlow('Diabetes')}>2. Blood Sugar</button>
-            <button className="ussd-option-btn" onClick={() => enterFlow('Hypertension', 'Diabetes')}>3. Both</button>
-            <button className="ussd-option-btn" onClick={() => goTo('MAIN_MENU')}>0. Back</button>
+            <button data-key="1" className="ussd-option-btn" onClick={() => enterFlow('Hypertension')}>1. Blood Pressure</button>
+            <button data-key="2" className="ussd-option-btn" onClick={() => enterFlow('Diabetes')}>2. Blood Sugar</button>
+            <button data-key="3" className="ussd-option-btn" onClick={() => enterFlow('Hypertension', 'Diabetes')}>3. Both</button>
+            <button data-key="0" className="ussd-option-btn" onClick={() => goTo('MAIN_MENU')}>0. Back</button>
           </>
         ) : (
           <>
             {present.map((c, i) => (
-              <button key={c} className="ussd-option-btn" onClick={() => enterFlow(c)}>{i + 1}. {MENU_LABEL[c]} ({c})</button>
+              <button key={c} data-key={String(i + 1)} className="ussd-option-btn" onClick={() => enterFlow(c)}>{i + 1}. {MENU_LABEL[c]} ({c})</button>
             ))}
-            <button className="ussd-option-btn" onClick={() => goTo('MAIN_MENU')}>0. Back</button>
+            <button data-key="0" className="ussd-option-btn" onClick={() => goTo('MAIN_MENU')}>0. Back</button>
           </>
         )}
       </div>

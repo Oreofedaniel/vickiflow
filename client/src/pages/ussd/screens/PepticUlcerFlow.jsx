@@ -17,7 +17,7 @@ export default function PepticUlcerFlow({ actions }) {
       <div className="ussd-lines"><p>Any of these symptoms today?</p></div>
       <div className="ussd-options">
         {SYMPTOM_OPTIONS.map((s, i) => (
-          <button key={s} className="ussd-option-btn" onClick={() => choose(s)}>{i + 1}. {s}</button>
+          <button key={s} data-key={String(i + 1)} className="ussd-option-btn" onClick={() => choose(s)}>{i + 1}. {s}</button>
         ))}
       </div>
     </div>
