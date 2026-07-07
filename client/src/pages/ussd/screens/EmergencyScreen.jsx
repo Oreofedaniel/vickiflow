@@ -37,7 +37,7 @@ export default function EmergencyScreen({ session, actions }) {
           <p>Please dial in with a registered phone number first so we know who to alert.</p>
         </div>
         <div className="ussd-options">
-          <button data-key="1" className="ussd-option-btn" onClick={startNewSession}>📞 Dial *384*8425#</button>
+          <button data-key="1" className="ussd-option-btn" onClick={startNewSession}>1. 📞 Dial *384*8425#</button>
         </div>
       </div>
     );
@@ -55,7 +55,7 @@ export default function EmergencyScreen({ session, actions }) {
       </div>
       {ready && (
         <div className="ussd-options">
-          <button data-key="1" className="ussd-option-btn" onClick={() => goTo('MAIN_MENU')}>📞 Dial *384*8425# again</button>
+          <button data-key="1" className="ussd-option-btn" onClick={() => goTo('MAIN_MENU')}>1. 📞 Dial *384*8425# again</button>
         </div>
       )}
     </div>

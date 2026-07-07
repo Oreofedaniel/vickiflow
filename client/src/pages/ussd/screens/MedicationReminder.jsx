@@ -53,7 +53,7 @@ export default function MedicationReminder({ stage, session, actions }) {
           <p>Stay consistent. Stay healthy. 💪</p>
         </div>
         <div className="ussd-options">
-          <button data-key="1" className="ussd-option-btn" onClick={() => goTo('MAIN_MENU')}>📞 Dial *384*8425# again</button>
+          <button data-key="1" className="ussd-option-btn" onClick={() => goTo('MAIN_MENU')}>1. 📞 Dial *384*8425# again</button>
         </div>
       </div>
     );
@@ -119,7 +119,7 @@ export default function MedicationReminder({ stage, session, actions }) {
         <p>Do NOT skip doses. 💊</p>
       </div>
       <div className="ussd-options">
-        <button data-key="1" className="ussd-option-btn" onClick={() => goTo('MAIN_MENU')}>📞 Dial *384*8425# again</button>
+        <button data-key="1" className="ussd-option-btn" onClick={() => goTo('MAIN_MENU')}>1. 📞 Dial *384*8425# again</button>
       </div>
     </div>
   );

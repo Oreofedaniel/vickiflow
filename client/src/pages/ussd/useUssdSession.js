@@ -24,27 +24,14 @@ const initialSession = {
 
 export function useUssdSession() {
   const [stage, setStage] = useState('DIAL');
-  const [history, setHistory] = useState([]);
   const [session, setSession] = useState(initialSession);
   const [smsInbox, setSmsInbox] = useState([]);
   const [error, setError] = useState('');
 
   const goTo = useCallback((nextStage, patch) => {
-    setHistory((h) => [...h, stage]);
     if (patch) setSession((s) => ({ ...s, ...patch }));
     setError('');
     setStage(nextStage);
-  }, [stage]);
-
-  const goBack = useCallback(() => {
-    setHistory((h) => {
-      if (h.length === 0) return h;
-      const copy = [...h];
-      const prev = copy.pop();
-      setStage(prev);
-      return copy;
-    });
-    setError('');
   }, []);
 
   const updateSession = useCallback((patch) => {
@@ -64,7 +51,6 @@ export function useUssdSession() {
   }, []);
 
   const startNewSession = useCallback(() => {
-    setHistory([]);
     setSession(initialSession);
     setError('');
     setStage('DIAL');
@@ -100,9 +86,7 @@ export function useUssdSession() {
     session,
     smsInbox,
     error,
-    canGoBack: history.length > 0,
     goTo,
-    goBack,
     updateSession,
     updateVitalsDraft,
     resetVitalsDraft,

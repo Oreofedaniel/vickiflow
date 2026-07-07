@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const KEYS = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '*', '0', '#'];
 
@@ -15,15 +15,36 @@ function getFocusedInput(container) {
   return null;
 }
 
-export default function UssdPhoneFrame({ onEmergency, onBack, canGoBack, onEnd, children }) {
+// Falls back to the screen's own text input if focus didn't land there (e.g. autoFocus
+// got dropped after a programmatic screen transition), so typing always goes somewhere sensible.
+function resolveActiveInput(container) {
+  const focused = getFocusedInput(container);
+  if (focused) return focused;
+  const candidate = container?.querySelector('input');
+  if (candidate) {
+    candidate.focus();
+    return candidate;
+  }
+  return null;
+}
+
+export default function UssdPhoneFrame({ onEmergency, onEnd, children }) {
   const screenRef = useRef(null);
   const [buffer, setBuffer] = useState('');
   const [keypadError, setKeypadError] = useState('');
   const [typingInField, setTypingInField] = useState(false);
 
+  // Re-check on every screen change — relying on blur alone can leave this stale
+  // when the focused input unmounts as part of a screen transition (e.g. the 999 shortcut).
+  useEffect(() => {
+    setTypingInField(!!getFocusedInput(screenRef.current));
+    setBuffer('');
+    setKeypadError('');
+  }, [children]);
+
   const pressKey = (k) => {
     setKeypadError('');
-    const input = getFocusedInput(screenRef.current);
+    const input = resolveActiveInput(screenRef.current);
     if (input) {
       setInputValue(input, input.value + k);
       return;
@@ -33,7 +54,7 @@ export default function UssdPhoneFrame({ onEmergency, onBack, canGoBack, onEnd, 
 
   const backspace = () => {
     setKeypadError('');
-    const input = getFocusedInput(screenRef.current);
+    const input = resolveActiveInput(screenRef.current);
     if (input) {
       setInputValue(input, input.value.slice(0, -1));
       return;
@@ -42,7 +63,17 @@ export default function UssdPhoneFrame({ onEmergency, onBack, canGoBack, onEnd, 
   };
 
   const send = () => {
-    const input = getFocusedInput(screenRef.current);
+    const input = resolveActiveInput(screenRef.current);
+    const typed = input ? input.value : buffer;
+
+    if (typed === '999' || typed === '911') {
+      if (input) setInputValue(input, '');
+      setBuffer('');
+      setKeypadError('');
+      onEmergency();
+      return;
+    }
+
     if (input) {
       screenRef.current.querySelector('[data-key="send"]')?.click();
       return;
@@ -87,13 +118,6 @@ export default function UssdPhoneFrame({ onEmergency, onBack, canGoBack, onEnd, 
         <button className="ussd-key-ok" onMouseDown={(e) => e.preventDefault()} onClick={send}>OK / Send</button>
         <button className="ussd-key-back" onMouseDown={(e) => e.preventDefault()} onClick={backspace}>⌫</button>
         <button className="ussd-key-end" onMouseDown={(e) => e.preventDefault()} onClick={onEnd}>End</button>
-      </div>
-      <div className="ussd-phone-footer">
-        {canGoBack && (
-          <button className="ussd-back-btn" onClick={onBack}>
-            🔙 Back
-          </button>
-        )}
       </div>
     </div>
   );

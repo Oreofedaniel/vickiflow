@@ -27,13 +27,13 @@ const REMINDER_STAGES = ['REMINDER_4_1', 'REMINDER_4_2', 'REMINDER_4_3', 'REMIND
 
 export default function UssdSimulator() {
   const {
-    stage, session, smsInbox, canGoBack,
-    goTo, goBack, updateSession, updateVitalsDraft, resetVitalsDraft, pushSms, startNewSession,
+    stage, session, smsInbox,
+    goTo, updateSession, updateVitalsDraft, resetVitalsDraft, pushSms, startNewSession,
     lookupPhone, registerPatient, logVitals, getVitalsHistory, setReminderTime,
   } = useUssdSession();
 
   const actions = {
-    goTo, goBack, updateSession, updateVitalsDraft, resetVitalsDraft, pushSms, startNewSession,
+    goTo, updateSession, updateVitalsDraft, resetVitalsDraft, pushSms, startNewSession,
     lookupPhone, registerPatient, logVitals, getVitalsHistory, setReminderTime,
   };
 
@@ -60,7 +60,7 @@ export default function UssdSimulator() {
       <h2>VickiFlow USSD Demo</h2>
       <p className="subtitle">Simulates the *384*8425# feature-phone flow — no internet or smartphone needed on the patient's side.</p>
       <div className="ussd-page">
-        <UssdPhoneFrame onEmergency={() => goTo('EMERGENCY')} onBack={goBack} canGoBack={canGoBack} onEnd={startNewSession}>
+        <UssdPhoneFrame onEmergency={() => goTo('EMERGENCY')} onEnd={startNewSession}>
           {renderScreen()}
         </UssdPhoneFrame>
         <div className="ussd-sms-panel">

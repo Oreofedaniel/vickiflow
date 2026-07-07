@@ -185,7 +185,7 @@ export default function Registration({ stage, session, actions }) {
         <p>Welcome to VickiFlow, {reg.firstName}.</p>
       </div>
       <div className="ussd-options">
-        <button data-key="1" className="ussd-option-btn" onClick={continueToMenu}>📞 Dial *384*8425# again</button>
+        <button data-key="1" className="ussd-option-btn" onClick={continueToMenu}>1. 📞 Dial *384*8425# again</button>
       </div>
     </div>
   );

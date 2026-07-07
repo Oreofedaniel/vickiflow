@@ -82,7 +82,7 @@ export default function MainMenu({ stage, session, actions }) {
           <p>Stay healthy. 💙</p>
         </div>
         <div className="ussd-options">
-          <button data-key="1" className="ussd-option-btn" onClick={startNewSession}>📞 Dial *384*8425# again</button>
+          <button data-key="1" className="ussd-option-btn" onClick={startNewSession}>1. 📞 Dial *384*8425# again</button>
         </div>
       </div>
     );
